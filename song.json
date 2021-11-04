@@ -1,5 +1,6 @@
 [
-    { "title": "Hurricane",
+    { 
+        "title": "Hurricane",
         "artist": "Kanye West",
         "release": 2021,
         "genre": ["Rap"]
