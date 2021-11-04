@@ -2,61 +2,61 @@
     {
         "title": "Hurricane",
         "artist": "Kanye West",
-        "release": 2021,
+        "release": "2021",
         "genre": ["Rap"]
     },
     {
         "title": "Weekend",
         "artist": "Mac Miller feat. Miguel",
-        "release": 2015,
+        "release": "2015",
         "genre": ["Rap"]
     },
     {
         "title": "Consideration",
         "artist": "Rihanna feat. SZA",
-        "release": 2016,
+        "release": "2016",
         "genre": ["Hip Hop"]
     },
     {
         "title": "Banana Clip",
         "artist": "Miguel",
-        "release": 2017,
+        "release": "2017",
         "genre": ["R and B"]
     },
     {
         "title": "Normal Girl",
         "artist": "SZA",
-        "release": 2017,
+        "release": "2017",
         "genre": ["R and B"]
     },
     {
         "title": "Man in the Hat",
         "artist": "Mac Miller",
-        "release": 2011,
+        "release": "2011",
         "genre": ["Rap"]
     },
     {
         "title": "Garden",
         "artist": "SZA",
-        "release": 2017,
+        "release": "2017",
         "genre": ["R and B"]
     },
     {
         "title": "Playing Games",
         "artist": "Summer Walker",
-        "release": 2019,
+        "release": "2019",
         "genre": ["R and B"]
     },
     {
         "title": "Praise God",
         "artist": "Kanye West",
-        "release": 2021,
+        "release": "2021",
         "genre": ["Rap"]
     },
     {
         "title": "Working Out",
         "artist": "JID",
-        "release": 2018,
+        "release": "2018",
         "genre": ["Hip Hop"]
     },
 ]
