@@ -7,22 +7,79 @@
 		  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 		  crossorigin="anonymous">
 		  </script>
+		  <script language="javascript" src="song.json"></script>
 	</head>
-	<body>
-		<script language="javascript">
-			$.get("https://raw.githubusercontent.com/saramorrison/Assignment9/main/song_list.json",
-				function(data) {
-					str = JSON.stringify(data);
-					document.write(str +"<br/>");
-				strHTML= "<ul>";
-				data.forEach(function(song) { 
-				strHTML += "<li>" 
-					    + song.title + ": " 
-						+ sone.artist + "</li>";
-					}) 
-			strHTML += "</ul>";
-			document.write (strHTML);  /**/
-			})	
-		</script>
-	</body>		
+
+<div id = 'part1Header'></div>
+<div id = 'str'></div>
+<div id = 'table'></div>
+<div id = "filter">
+ 	<div id = "header" > 
+ 	<lu id = "list" ></lu>
+ </div>
+
+
+<body>
+
+
+ 	<form>
+        <select id="Genre">
+             <option>Rap</option>
+             <option>Hip Hop</option>
+             <option>R and B</option>
+         </select>
+         <button type="button" id="filter">Filter</button>
+
+ 	</form>
+<body>
+	<h1>Songs</h1>
+
+	
+	<script language="javascript">
+
+		var xhttp = new XMLHttpRequest();
+		$.get("https://raw.githubusercontent.com/saramorrison/Assignment9/main/song.json", function(data){
+			/*document.getElementById('part1Header').innerHTML = "Part 1: ";*/
+			str = JSON.stringify(data);
+			document.getElementById('str').innerHTML = str;
+
+			data.forEach(function(song) {
+					table += "<ul style = 'list-style-type: none;'><li>" +
+					song.title +  "</li>" 
+					+ "<li>Artist: " + song.artist + "</li>" 
+					+ "<li>genre: ";
+
+					for (i = 0; i < song.genre.length; i++) {
+					 	table += song.genre[i];
+					}
+
+					table += "</li>";
+					table += "<li>Year Released: " + song.release +  "</li></ul><br />";
+
+				})
+
+			document.getElementById('table').innerHTML = table;
+
+
+			$("#filter").onclick(function() {
+				var genre = $("#genre option: selected".text());
+				document.getElementById('header'.innerHTML) = "Genre: " + genre;
+
+				data.forEach(function(song) {
+					for (i = 0; i < song.genre.length; i++) {
+						if (song.genre[i].localeCompare(genre) == 0) {
+							string += string + "<li>" + song.title + "</li>";
+						}
+					}
+
+				})
+				document.getElementById("list").innerHTML = string;
+
+			})
+		})
+
+	</script>
+
+
+</body>
 </html>
