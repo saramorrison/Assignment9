@@ -1,85 +1,130 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-	<head>
-	<meta charset="utf-8">
-		<script
-		  src="https://code.jquery.com/jquery-3.6.0.js"
-		  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-		  crossorigin="anonymous">
-		  </script>
-		  <script language="javascript" src="song.json"></script>
-	</head>
+<head>
+<meta charset="utf-8">
+<title>Song List</title>
+	<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+	<style>
 
-<div id = 'part1Header'></div>
-<div id = 'str'></div>
-<div id = 'table'></div>
-<div id = "filter">
- 	<div id = "header" > 
- 	<lu id = "list" ></lu>
- </div>
+		#demo {
+			height: 80px;
+		}
+		ul li {
+			list-style-type: none;
+		}
 
+	</style>
+</head>
 
 <body>
+	<h2><STRONG>PART 2:</STRONG> Serialized String</h2>
+	<div id="serialized">&nbsp;</div><br />
 
+	<h2><STRONG>PART 3:</STRONG> Friendly Format</h2>
+	<div id="table"></div><br />
 
- 	<form>
-        <select id="Genre">
-             <option>Rap</option>
-             <option>Hip Hop</option>
-             <option>R and B</option>
-         </select>
-         <button type="button" id="filter">Filter</button>
+	<h2><STRONG>PART 4:</STRONG> Specific Genre</h2>
+	<div id="d_form">
+		<form id="gen_form">
+			<label for="genres">Choose a Genre:</label>
+			<select id="genres">
+				<option value="Rap">Rap</option>
+				<option value="Hip Hop">Hip Hop</option>
+				<option value="R and B">R and B</option>
 
- 	</form>
-<body>
-	<h1>Songs</h1>
+			</select>
+			<button type="button" onclick="filter()">Filter</button>
+		</form>
 
-	
+	</div><br /><br />
+
+	<div id="filter_table"> </div><br />
+
 	<script language="javascript">
 
-		var xhttp = new XMLHttpRequest();
-		$.get("https://raw.githubusercontent.com/saramorrison/Assignment9/main/song.json", function(data){
-			/*document.getElementById('part1Header').innerHTML = "Part 1: ";*/
-			str = JSON.stringify(data);
-			document.getElementById('str').innerHTML = str;
+		$(document).ready(function() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					str = "<div id='string'>" + this.responseText + "</div><br />";
+					document.getElementById("serialized").innerHTML = str;
+					var data = document.getElementById("string").innerHTML;
+					data = JSON.parse(data);
 
-			data.forEach(function(song) {
-					table += "<ul style = 'list-style-type: none;'><li>" +
-					song.title +  "</li>" 
-					+ "<li>Artist: " + song.artist + "</li>" 
-					+ "<li>genre: ";
-
-					for (i = 0; i < song.genre.length; i++) {
-					 	table += song.genre[i];
-					}
-
-					table += "</li>";
-					table += "<li>Year Released: " + song.release +  "</li></ul><br />";
-
-				})
-
-			document.getElementById('table').innerHTML = table;
-
-
-			$("#filter").onclick(function() {
-				var genre = $("#genre option: selected".text());
-				document.getElementById('header'.innerHTML) = "Genre: " + genre;
-
-				data.forEach(function(song) {
-					for (i = 0; i < song.genre.length; i++) {
-						if (song.genre[i].localeCompare(genre) == 0) {
-							string += string + "<li>" + song.title + "</li>";
+					tablestr = "<br />";
+					data.forEach(function(song) {
+						tablestr += "<ul style='list-style-type: none;'><li>" + song.title + "</li>"
+								 + "<li>" + "Artist(s): ";
+						for (var i = 0; i < song.artist.length; i++) {
+							tablestr += song.artist[i];
+							
 						}
-					}
+						tablestr += "</li>" + "<li>" + "Genre: <ul>";
+						for (var i = 0; i < song.genre.length; i++) {
 
-				})
-				document.getElementById("list").innerHTML = string;
+					 		tablestr += "<li>" + song.genre[i] + "</li>";
 
-			})
-		})
+						}
+						tablestr += "</ul></li>"
 
+								 + "<li>" + "Year: " + song.release + "</li>"
+
+
+								 + "</ul><br />";
+
+						});
+					document.getElementById("table").innerHTML = tablestr;
+				}
+			};
+
+			xhttp.open("GET", "https://saramorrison.github.io/Assignment9/song.json", true);
+			xhttp.send();
+		});
+
+		function filter()
+		{
+
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var data = this.responseText;
+					data = JSON.parse(data);
+
+					selected_genre = document.getElementById("genres").value;
+
+
+					tablestr = "<br />";
+					data.forEach(function(song) {
+						for (var i = 0; i < song.genre.length; i++) {
+							if (song.genre[i] == selected_genre) {
+								tablestr += "<ul style='list-style-type: none;'>";
+					 		
+								tablestr += song.title + "</li>"
+								 + "<li>" + "Artist(s): " + song.artist + "</li>" 
+								 + "<li>" + "Genre: <ul>";
+								for (var i = 0; i < song.genre.length; i++) {
+
+							 		tablestr += "<li>" + song.genre[i] + "</li>";
+
+								}
+								tablestr += "</ul></li>"
+
+										 + "<li>" + "Year: " + song.release + "</li>"
+
+
+										 + "</ul><br />";
+							}
+
+						}
+
+					});
+				document.getElementById("filter_table").innerHTML = tablestr;
+				}
+			};
+
+			xhttp.open("GET", "https://sara.morrison.github.io/Assignment9/song.json", true);
+			xhttp.send();
+	}
 	</script>
-
-
 </body>
 </html>
