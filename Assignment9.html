@@ -15,16 +15,18 @@
         <h2>Part 3: User Friendly Display</h2>
         <div id="table"></div>
         <h2>Part 4: Filter the Data</h2>
-        <h4>Pick a genre to see songs from that genre:</h4><br>
-            <form>
-                <label for="genres">Select a genre: </label> 
-                <select name="genres" id="genres" onchange="genreSelect()">
+        <div id="d_form">
+            <form id="gen_form">
+                <label for="genres">Choose a Genre:</label>
+                <select id="genres">
                     <option value="Rap">Rap</option>
                     <option value="Hip Hop">Hip Hop</option>
                     <option value="R and B">R and B</option>
+
                 </select>
+                <button type="button" onclick="genreSelect()">Select</button>
             </form>
-            <div id="select"><div>
+        <div id="select"><div>
         <script language="javascript">
     	$.getJSON( "https://saramorrison.github.io/Assignment9/song.json", 
     		  function(data) { 
